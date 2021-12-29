@@ -1,0 +1,30 @@
+{% extends "stores\base.html" %}
+
+{% block content %}
+
+   <div class="row">
+      <div class="col-sm-6 mb-5">
+
+   {% if request.user.is_staff %}
+    <h2>Logged as {{request.user}}</h2>
+   {% endif %}
+
+   </div>
+   <div class="col-sm-6 float-end">
+   </div>
+   {% for s in stores %} 
+      <a href="{% url "login" s.id  %}" style=" text-decoration: none;"><h3>{{s.store_name}} <h3></a><br><br><br><br> 
+   {% endfor%}
+
+   
+</div>
+
+
+
+
+
+
+
+
+  
+{% endblock content %}

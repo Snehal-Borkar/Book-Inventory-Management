@@ -1,0 +1,24 @@
+{% extends "stores\base.html" %}
+
+{% block content %}
+
+{% if mystore %}
+   <h2> Login To {{mystore.store_name}} </h2>
+{% else %}
+<h2> Login To Your store </h2>
+{% endif%}
+    <form action= "/loginuser/" method ='POST'>{% csrf_token %}
+  <div class="form-group">
+    <label for="Username">Username</label>
+    <input type="text" class="form-control"  name="username" aria-describedby=" " placeholder="Enter username">
+     
+  </div>
+  <div class="form-group">
+    <label for="Password">Password</label>
+    <input type="password" class="form-control" name="password"  placeholder="Password">
+  </div>
+   
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+  
+    {% endblock content %}

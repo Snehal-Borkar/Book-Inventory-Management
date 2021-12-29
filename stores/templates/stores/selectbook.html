@@ -1,0 +1,103 @@
+{% extends "stores\base.html" %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-sm-3">
+    <img src={{  book_info.imageLinks }} style="width:270px;"> 
+  </div>
+  <div class="col-sm-9 ">
+    {{  book_info.description | safe}}
+  </div>
+</div>
+
+<br> 
+
+<div class="row">
+  <div class="col-sm-3">
+{{   book_info.title }}<br> 
+By {{  book_info.author }}<br>
+
+pages : {{  book_info.pagecount }}<br>
+published on : {{  book_info.publishedDate }}<br>
+language : {{  book_info.language }}<br>   
+listPrice : {{  book_info.listPrice }} {{  book_info.currencyCode }}<br>
+retailPrice : {{  book_info.retailPrice }} {{  book_info.currencyCode }}<br> 
+</div>
+<div class="col-sm-9">
+ 
+
+{% if   book_info.quantity != None   %}
+
+<h6> Book with Quantity {{ book_info.quantity }} is available in inventory </h6>
+  <form action= "/Mystore/" method ='POST'>{% csrf_token %}
+
+    <input type="hidden" name="book_id" value={{ book_info.book_id}} />
+    <div class="row">
+      <label class="mb-2" ><strong>Update Quantity :</strong></label>
+    <div class ='col-sm-2'>
+        
+        <input  class="form-control"  type="number"  name="quantity" min="0" value="{{book_info.quantity}}">
+    </div> 
+    <div class ='col-sm-2 '> 
+    <button type="submit" class="btn btn-primary">Update</button>
+  </div> 
+</div> 
+    </form>
+
+{% else %}
+
+<form action="{% url "addbook" %}" method ='POST'>{% csrf_token %}
+   <div class="row">
+    <div class ='col-sm-2'>
+        <label class=" " >Select Quantity :</label>
+    </div>
+    <div class ='col-sm-2'>
+        <select class="form-select"   aria-label="multiple select example"  name="quantity">  
+          <option selected value=1>1</option>
+          <option value=2>2</option>
+          <option value=3>3</option>
+          <option value=4>4</option>
+          <option value=5>5</option>
+          <option value=6>6</option> 
+          <option value=7>7</option>
+          <option value=8>8</option>
+          <option value=9>9</option>
+          <option value=10>10</option>
+          <option value=11>11</option>
+          <option value=12>12</option>
+          <option value=13>13</option>
+          <option value=14>14</option>
+          <option value=15>15</option>
+          <option value=16>16</option>
+          <option value=17>17</option>
+          <option value=18>18</option>
+          <option value=19>19</option>
+          <option value=20>20</option> 
+
+        </select> 
+           
+  </div> 
+    <div class ='col-sm-3 '>
+      <input type="hidden" name="book_id" value={{ book_info.book_id}} />
+      <button type="submit" class="btn btn-primary">Add Inventory</button>
+  </div> 
+</div> 
+
+</form>
+
+{% endif %}
+</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+ 
+
+
+  
+{% endblock content %}

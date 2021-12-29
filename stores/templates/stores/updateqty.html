@@ -1,0 +1,31 @@
+{% extends "stores\base.html" %}
+
+{% block content %}
+ 
+   <div class="row">
+    <div class="col-sm-6 mb-5">
+     <h2> Logged as {{request.user}} </h2>
+     </div>
+     <div class="col-sm-6 mb-5 ">
+        <a href="{% url "remove" book.book_id  %}" class="btn btn-primary">Remove book Inventory</a>
+    </div>
+  </div>
+   
+  
+<a href= ""><img src={{ book.imageLinks }}></a>
+{{ book.quantity }}
+ 
+<form action= "/Mystore/" method ='POST'>{% csrf_token %}
+
+<input type="hidden" name="book_id" value={{ book.book_id}} />
+<div class ='col-sm-2'>
+    <label class=" " >quantity :</label>
+    <input  class="form-control"  type="number"  name="quantity" min="0" value="{{book.quantity}}">
+</div>  
+<button type="submit" class="btn btn-primary">Update</button>
+</form>
+
+
+
+ 
+{% endblock content %}  

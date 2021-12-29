@@ -1,0 +1,39 @@
+{% extends "stores\base.html" %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-sm-6 mb-5">
+   <h2> Logged as {{request.user}} </h2>
+   </div>
+   <div class="col-sm-6 mb-5 ">
+   <a href="/Mystore/searchbook/" class="btn btn-outline-primary float-end"> Add new book</a>
+  </div>
+</div>
+ 
+<div class="row">
+  
+{% for book in books %} 
+  <div class="col-sm-2 mb-5">
+    <a href= "{% url "updatebookquantity" book.book_id %}"><img src={{ book.imageLinks }}></a>
+    <div class="row">
+      <div class="col-sm-12 ">
+        
+        {% if book.quantity  %}
+       <div > {{ book.quantity }} 
+        {{book.status}}
+      </div>
+          {% else %}
+         <div > 
+         <span class="text-danger"> {{book.status}}</span>
+         </div>
+        {% endif  %}
+        
+      </div>
+    </div>
+
+  </div>
+{% comment %} <a href="{% url "updatebookquantity" book.book_id %}" class="btn btn-primary">update quantity</a> {% endcomment %}
+{% endfor %}
+</div> 
+{% endblock content %}

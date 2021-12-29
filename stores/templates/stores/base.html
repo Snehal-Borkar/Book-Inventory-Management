@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Store</title>
+    <link rel="stylesheet" href="{% static 'stores\css\bootstrap.css' %}">
+</head>
+<body class="container">
+ <div class="container mt-5">
+    
+    <h2 class="text-center alert alert-danger"><a href= "/Mystore/"  type="button"  class="btn btn-light float-start">Home   </a> Welcome to Your Store Management  <button type="button" class="btn btn-light float-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Register user</button><a href= "/logout/"  type="button"  class="btn btn-light float-end me-2">Logout  </a>
+    </h2>
+  <div>
+
+
+
+{% if messages %} 
+ <div class="row">
+ <div class="col-sm-4">
+ </div>
+ <div class="col-sm-5 ">
+       {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible text-center  " role="alert">
+    {% comment %} <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> {% endcomment %}
+    <strong>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}{{ message.tags|title }}{% endif %}!</strong> {{ message }}
+  </div>
+  {% endfor %}
+ </div>
+ </div>
+{% endif %}
+
+
+      
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Create User</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+          <form action="/registerstore/" method="POST">{% csrf_token %}
+            <div class="form-group">
+                <label for="storename">Store Name</label>
+                <input type="text" class="form-control" placeholder="Store Name" aria-label="storename" name="storename" required>
+            </div>
+              <div class="form-group">
+                  <label for="username">Username</label>
+                  <input type="text" class="form-control" placeholder="Username" aria-label="Username" name="username" required>
+              </div>
+              <div class="form-group">
+                  <label for="username">First Name</label>
+                  <input type="text" class="form-control" placeholder="First Name" aria-label="First_name" name="first_name" required >
+              </div>
+              <div class="form-group">
+                  <label for="username">Last Name</label>
+                  <input type="text" class="form-control" placeholder="Last Name" aria-label="Username" name="last_name" required>
+              </div>
+              <div class="form-group">
+                  <label for="username">Email Address</label>
+                  <input type="text" class="form-control" placeholder="Email Address" aria-label="Email" name="email" required >
+              </div>
+              <div class="form-group">
+                  <label for="username">Password</label>
+                  <input type="text" class="form-control" placeholder="Password" aria-label="Password"  name="password" required>
+              </div>
+              <div class="form-group">
+                  <label for="username">Confirm Password</label>
+                  <input type="text" class="form-control" placeholder="Confirm Password" aria-label="Cpassword"  name="cpassword" required>
+              </div>
+          
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="Submit" class="btn btn-primary">Register</button>
+           
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+    {% block content %}
+
+      
+  
+    {% endblock content %}
+    
+</div>
+</div>
+    
+    <script src="{% static 'stores\js\bootstrap.js' %}"></script>
+
+
+     
+</body>
+</html>
