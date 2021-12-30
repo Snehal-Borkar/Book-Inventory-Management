@@ -2,11 +2,27 @@
 
 {% block content %}
 
+<div class="col-sm-6 mb-5">
+  <h5> Signed in  as<Strong> {{request.user}}</strong> </h5>
+  </div>
+
 <div class="row">
   <div class="col-sm-3">
     <img src={{  book_info.imageLinks }} style="width:270px;"> 
   </div>
-  <div class="col-sm-9 ">
+  <div class="col-sm-9 bg-light ">
+   
+    <div class="col-sm-12 ">
+      <h2>{{book_info.title}}</h2>
+        <div class="row">
+            <div class="col-sm-8 ">
+               {% for b in book_info.author %}
+               <h5 class="float-end"> By- <i>{{b}}</i> </h5>
+                {% endfor %}
+            </div>
+          </div>
+      </div>
+
     {{  book_info.description | safe}}
   </div>
 </div>
@@ -14,10 +30,7 @@
 <br> 
 
 <div class="row">
-  <div class="col-sm-3">
-{{   book_info.title }}<br> 
-By {{  book_info.author }}<br>
-
+  <div class="col-sm-3"> 
 pages : {{  book_info.pagecount }}<br>
 published on : {{  book_info.publishedDate }}<br>
 language : {{  book_info.language }}<br>   
@@ -29,7 +42,7 @@ retailPrice : {{  book_info.retailPrice }} {{  book_info.currencyCode }}<br>
 
 {% if   book_info.quantity != None   %}
 
-<h6> Book with Quantity {{ book_info.quantity }} is available in inventory </h6>
+<h6> Book with <strong> Quantity {{ book_info.quantity }} </strong>is available in inventory </h6>
   <form action= "/Mystore/" method ='POST'>{% csrf_token %}
 
     <input type="hidden" name="book_id" value={{ book_info.book_id}} />

@@ -1,10 +1,12 @@
 {% extends "stores\base.html" %}
 
+
+
 {% block content %}
 
 <div class="row">
   <div class="col-sm-6 mb-5">
-   <h2> Logged as {{request.user}} </h2>
+   <h5> Signed in  as<Strong> {{request.user}}</strong> </h5>
    </div>
    <div class="col-sm-6 mb-5 ">
    <a href="/Mystore/searchbook/" class="btn btn-outline-primary float-end"> Add new book</a>
@@ -15,7 +17,7 @@
   
 {% for book in books %} 
   <div class="col-sm-2 mb-5">
-    <a href= "{% url "updatebookquantity" book.book_id %}"><img src={{ book.imageLinks }}></a>
+    <a href= "{% url "updatebookquantity" book.book_id %}"><img src={{ book.imageLinks }} style=""></a>
     <div class="row">
       <div class="col-sm-12 ">
         

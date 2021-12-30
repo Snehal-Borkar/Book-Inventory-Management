@@ -128,12 +128,12 @@ def handlelogin(request,id=None):
             mystore=Store.objects.get(id=id)
             return render(request,"stores/login.html",{"mystore":mystore})
 
-
+@login_required(login_url="/loginuser/")
 def handlelogout(request,):
     logout(request)
     return HttpResponseRedirect("/")
 
-
+ 
 def handleregister(request): 
     if request.method=="POST":
         user=request.user
@@ -181,13 +181,13 @@ def handleregister(request):
         return HttpResponseRedirect("login/")
  
 
-
+@login_required(login_url="/loginuser/")
 def addbookpage(request):
     return render(request,"stores/searchedbooks.html")
 
 
 
-login_required
+@login_required(login_url="/loginuser/")
 def searchedbook(request,book_id=None):
     
     # query=request.GET.get['search']
@@ -312,7 +312,7 @@ def Mystore(request,book_id=None):
     # print(book_list)  
     return render(request,"stores/Mystore.html",{"books":book_list,})
 
-
+@login_required(login_url="/loginuser/")
 def remove(request,book_id=None):
     user=request.user
     user_q=User.objects.get(username=user)

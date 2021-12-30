@@ -1,12 +1,17 @@
 {% extends "stores\base.html" %}
 
 {% block content %}
-
-   <div class="row">
-      <div class="col-sm-6 mb-5">
+<div class="row">
+   <div class="col-sm-6 mb-5">
+ <h2>Login to Your Store</h2>
+</div>
 
    {% if request.user.is_staff %}
-    <h2>Logged as {{request.user}}</h2>
+  
+      <div class="col-sm-6 mb-5 ">
+       <h5 class="float-end"> Signed in  as<Strong> {{request.user}}</strong> </h5>
+       </div>
+      </div>
    {% endif %}
 
    </div>
